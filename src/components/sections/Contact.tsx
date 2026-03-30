@@ -1,20 +1,12 @@
 "use client";
 
 import { Mail, MapPin, Phone } from "lucide-react";
-import { useState, type FormEvent } from "react";
 import { AnimateIn } from "@/components/AnimateIn";
 
 const MAP_EMBED =
   "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d100939.98555096411!2d-122.50764017948502!3d37.757814996609724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80859a6d00690021%3A0x4a501367f076adff!2sSan%20Francisco%2C%20CA%2C%20USA!5e0!3m2!1sen!2s!4v1700000000000!5m2!1sen!2s";
 
 export function Contact() {
-  const [sent, setSent] = useState(false);
-
-  function onSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setSent(true);
-  }
-
   return (
     <section id="contact" className="bg-background py-20 sm:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -33,9 +25,13 @@ export function Contact() {
         <div className="mt-14 grid gap-10 lg:grid-cols-2">
           <AnimateIn>
             <form
-              onSubmit={onSubmit}
+              data-netlify="true"
+              name="contact"
+              method="POST"
+              action="/thank-you"
               className="rounded-2xl border border-border bg-card p-6 sm:p-8"
             >
+              <input type="hidden" name="form-name" value="contact" />
               <div className="space-y-5">
                 <div>
                   <label htmlFor="name" className="text-sm font-medium text-foreground">
@@ -85,11 +81,6 @@ export function Contact() {
               >
                 Send message
               </button>
-              {sent && (
-                <p className="mt-4 text-center text-sm text-primary" role="status">
-                  Thanks! This demo form doesn&apos;t send email—wire your API here.
-                </p>
-              )}
             </form>
           </AnimateIn>
 
