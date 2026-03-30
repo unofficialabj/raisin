@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { AnimateIn } from "@/components/AnimateIn";
 
 const members = [
@@ -29,7 +30,9 @@ const members = [
 
 export function Team() {
   return (
-    <section id="team" className="border-b border-border bg-card py-20 sm:py-24">
+    <section
+      id="team"
+      className="border-b border-border bg-card py-20 sm:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <AnimateIn>
           <p className="text-center text-sm font-semibold uppercase tracking-widest text-primary">
@@ -39,7 +42,8 @@ export function Team() {
             People behind the work
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-center text-muted">
-            A multidisciplinary group united by curiosity, ownership, and respect for your time.
+            A multidisciplinary group united by curiosity, ownership, and
+            respect for your time.
           </p>
         </AnimateIn>
 
@@ -48,10 +52,12 @@ export function Team() {
             <AnimateIn key={m.name} delay={i * 70}>
               <article className="group overflow-hidden rounded-2xl border border-border bg-background text-center transition hover:border-primary/40 hover:shadow-lg hover:shadow-primary/10">
                 <div className="relative aspect-[4/5] w-full overflow-hidden">
-                  <img
+                  <Image
                     src={m.image}
                     alt={m.name}
-                    className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                    fill
+                    className="object-cover transition duration-500 group-hover:scale-105"
+                    sizes="(max-width: 640px) 100vw, 25vw"
                   />
                 </div>
                 <div className="p-5">
