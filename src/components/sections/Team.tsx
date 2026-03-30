@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { AnimateIn } from "@/components/AnimateIn";
 
 const members = [
@@ -52,12 +51,10 @@ export function Team() {
             <AnimateIn key={m.name} delay={i * 70}>
               <article className="group overflow-hidden rounded-2xl border border-border bg-background text-center transition hover:border-primary/40 hover:shadow-lg hover:shadow-primary/10">
                 <div className="relative aspect-[4/5] w-full overflow-hidden">
-                  <Image
+                  <img
                     src={m.image}
                     alt={m.name}
-                    fill
-                    className="object-cover transition duration-500 group-hover:scale-105"
-                    sizes="(max-width: 640px) 100vw, 25vw"
+                    className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
                   />
                 </div>
                 <div className="p-5">

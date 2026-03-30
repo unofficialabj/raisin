@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { AnimateIn } from "@/components/AnimateIn";
 
 const projects = [
@@ -76,12 +75,10 @@ export function Portfolio() {
             <AnimateIn key={p.title} delay={i * 50}>
               <article className="group overflow-hidden rounded-2xl border border-border bg-background transition hover:border-primary/40 hover:shadow-xl hover:shadow-primary/10">
                 <div className="relative aspect-[4/3] overflow-hidden">
-                  <Image
+                  <img
                     src={p.image}
                     alt={p.title}
-                    fill
-                    className="object-cover transition duration-500 group-hover:scale-105"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-80 transition group-hover:opacity-90" />
                   <span className="absolute left-3 top-3 rounded-full bg-primary/90 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm">
