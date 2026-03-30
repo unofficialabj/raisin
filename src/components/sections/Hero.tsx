@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { AnimateIn } from "@/components/AnimateIn";
 
@@ -44,13 +43,10 @@ export function Hero() {
 
         <AnimateIn delay={120} className="relative mx-auto w-full max-w-lg lg:max-w-none">
           <div className="animate-float relative aspect-[4/3] overflow-hidden rounded-2xl border border-border bg-card shadow-2xl shadow-primary/10">
-            <Image
+            <img
               src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80"
               alt="Abstract technology and global connectivity"
-              fill
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              priority
+              className="absolute inset-0 h-full w-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
             <div className="absolute bottom-4 left-4 right-4 rounded-xl border border-white/10 bg-black/40 p-4 backdrop-blur-md">
