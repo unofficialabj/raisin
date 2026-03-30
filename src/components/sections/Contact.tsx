@@ -1,49 +1,12 @@
 "use client";
 
 import { Mail, MapPin, Phone } from "lucide-react";
-import { useState, type FormEvent } from "react";
 import { AnimateIn } from "@/components/AnimateIn";
-import emailjs from '@emailjs/browser';
-import { EMAILJS_CONFIG } from '@/lib/emailjs-config';
 
 const MAP_EMBED =
   "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d100939.98555096411!2d-122.50764017948502!3d37.757814996609724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80859a6d00690021%3A0x4a501367f076adff!2sSan%20Francisco%2C%20CA%2C%20USA!5e0!3m2!1sen!2s!4v1700000000000!5m2!1sen!2s";
 
 export function Contact() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
-
-  async function onSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setIsLoading(true);
-    setStatus('idle');
-
-    try {
-      const formData = new FormData(e.currentTarget);
-      const templateParams = {
-        from_name: formData.get('name'),
-        from_email: formData.get('email'),
-        message: formData.get('message'),
-        to_email: 'abjoshi98420@gmail.com',
-      };
-
-      await emailjs.send(
-        EMAILJS_CONFIG.SERVICE_ID,
-        EMAILJS_CONFIG.TEMPLATE_ID,
-        templateParams,
-        EMAILJS_CONFIG.PUBLIC_KEY
-      );
-
-      setStatus('success');
-      e.currentTarget.reset();
-    } catch (error) {
-      console.error('Email send failed:', error);
-      setStatus('error');
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
   return (
     <section id="contact" className="bg-background py-20 sm:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -62,9 +25,13 @@ export function Contact() {
         <div className="mt-14 grid gap-10 lg:grid-cols-2">
           <AnimateIn>
             <form
-              onSubmit={onSubmit}
+              data-netlify="true"
+              name="contact"
+              method="POST"
+              action="/thank-you"
               className="rounded-2xl border border-border bg-card p-6 sm:p-8"
             >
+              <input type="hidden" name="form-name" value="contact" />
               <div className="space-y-5">
                 <div>
                   <label htmlFor="name" className="text-sm font-medium text-foreground">
@@ -110,21 +77,10 @@ export function Contact() {
               </div>
               <button
                 type="submit"
-                disabled={isLoading}
-                className="mt-6 w-full rounded-xl bg-primary py-3 text-sm font-semibold text-white transition hover:bg-primary-hover disabled:opacity-50 disabled:cursor-not-allowed"
+                className="mt-6 w-full rounded-xl bg-primary py-3 text-sm font-semibold text-white transition hover:bg-primary-hover"
               >
-                {isLoading ? 'Sending...' : 'Send message'}
+                Send message
               </button>
-              {status === 'success' && (
-                <p className="mt-4 text-center text-sm text-green-600" role="status">
-                  Message sent successfully! We'll get back to you soon.
-                </p>
-              )}
-              {status === 'error' && (
-                <p className="mt-4 text-center text-sm text-red-600" role="status">
-                  Failed to send message. Please try again or contact us directly.
-                </p>
-              )}
             </form>
           </AnimateIn>
 
