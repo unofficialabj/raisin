@@ -26,6 +26,11 @@ export function Contact() {
       return;
     }
 
+    // Debug: Check if environment variables are available
+    console.log('Service ID:', process.env.NEXT_PUBLIC_SERVICE_ID);
+    console.log('Template ID:', process.env.NEXT_PUBLIC_TEMPLATE_ID);
+    console.log('Public Key:', process.env.NEXT_PUBLIC_PUBLIC_ID);
+
     try {
       await emailjs.sendForm(
         process.env.NEXT_PUBLIC_SERVICE_ID as string,
@@ -39,8 +44,8 @@ export function Contact() {
       setSuccess(true);
       form.current.reset();
     } catch (err) {
-      setError(true);
       console.error("EmailJS error:", err);
+      setError(true);
     } finally {
       setLoading(false);
     }
